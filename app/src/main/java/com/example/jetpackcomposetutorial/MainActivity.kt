@@ -4,17 +4,26 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.jetpackcomposetutorial.ui.theme.JetpackComposeTutorialTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,7 +36,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    DisplayText("Android")
+
                 }
             }
         }
@@ -35,15 +44,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun DisplayText(paragraph: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $paragraph!",
-        modifier = modifier
-    )
+fun DisplayText() {
+    Article(title )
 }
 
 @Composable
-fun FrontImage(message: String,modifier: Modifier = Modifier ){
+fun Article(title : String, shortDesciption : String, longDescription : String, imagePainter : Painter, modifier: Modifier = Modifier ){
     val image = painterResource(id = R.drawable.bg_compose_background)
     Box{
         Image(
@@ -51,9 +57,8 @@ fun FrontImage(message: String,modifier: Modifier = Modifier ){
             contentDescription = null,
             contentScale = ContentScale.Crop, //fits the image to the screen
 //            alpha = 0.7F //controls opacity
-            alignment = 
+
         )
-        DisplayText(paragraph = message, modifier = Modifier)
     }
 }
 
@@ -63,5 +68,9 @@ fun FrontImage(message: String,modifier: Modifier = Modifier ){
 fun GreetingPreview() {
     JetpackComposeTutorialTheme {
         FrontImage("Android")
+        DisplayText(message1 = stringResource(R.string.jetpack_compose_tutorial),
+            message2 = stringResource(R.string.about_jetpack),
+            message3 = stringResource(R.string.explanation))
+
     }
 }
