@@ -45,21 +45,38 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun DisplayText() {
-    Article(title )
+    Article(title = stringResource(R.string.jetpack_compose_tutorial), shortDesciption = stringResource(
+        id = R.string.about_jetpack), longDescription = stringResource(R.string.explanation),
+        imagePainter = painterResource(id = R.drawable.bg_compose_background)
+    )
 }
 
 @Composable
 fun Article(title : String, shortDesciption : String, longDescription : String, imagePainter : Painter, modifier: Modifier = Modifier ){
-    val image = painterResource(id = R.drawable.bg_compose_background)
-    Box{
-        Image(
-            painter = image,
-            contentDescription = null,
-            contentScale = ContentScale.Crop, //fits the image to the screen
-//            alpha = 0.7F //controls opacity
-
+    Column (modifier = Modifier){
+        Image(painter = imagePainter, contentDescription = null)
+        Text(
+            text = title,
+            modifier = Modifier
+                .padding(16.dp),
+            fontSize = 24.sp
         )
+        Text(
+            text = shortDesciption,
+            modifier = Modifier
+                .padding(16.dp),
+            textAlign = TextAlign.Justify
+        )
+        Text(
+            text = longDescription,
+            modifier = Modifier
+                .padding(16.dp),
+            textAlign = TextAlign.Justify
+        )
+
     }
+
+
 }
 
 @Preview(showBackground = true, showSystemUi = true,
@@ -67,10 +84,7 @@ fun Article(title : String, shortDesciption : String, longDescription : String, 
 @Composable
 fun GreetingPreview() {
     JetpackComposeTutorialTheme {
-        FrontImage("Android")
-        DisplayText(message1 = stringResource(R.string.jetpack_compose_tutorial),
-            message2 = stringResource(R.string.about_jetpack),
-            message3 = stringResource(R.string.explanation))
+        DisplayText()
 
     }
 }
